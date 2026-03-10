@@ -1,0 +1,23 @@
+{
+  "name": "ex03",
+  "version": "1.0.0",
+  "description": "ex03 lab 01 web app 2026",
+  "homepage": "https://github.com/PettyPedro19/Web-App/tree/wa-lab-2026#readme",
+  "bugs": {
+    "url": "https://github.com/PettyPedro19/Web-App/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PettyPedro19/Web-App.git#wa-lab-2026"
+  },
+  "license": "MIT",
+  "author": "Marco Pedron",
+  "type": "commonjs",
+  "main": "lab01ex03.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.19"
+  }
+}
