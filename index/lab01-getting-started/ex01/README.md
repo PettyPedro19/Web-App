@@ -47,5 +47,3 @@ To run the script and observe the results in the console, use the following comm
 node exercise.js
 
 ```
-
-Would you like me to provide a sample implementation of the code and the test suite?
