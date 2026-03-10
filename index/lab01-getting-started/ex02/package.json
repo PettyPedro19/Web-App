@@ -12,12 +12,13 @@
   },
   "license": "MIT",
   "author": "Marco Pedron",
-  "type": "commonjs",
+  "type": "module",
   "main": "lab01ex02.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "dayjs": "^1.11.19"
-  }
+  },
+  "keywords": []
 }

@@ -27,7 +27,8 @@ function Film(id, title, favorite = false, watchDate = null, rating = null) {
     this.toString = function () {
         const dateStr = this.watchDate ? this.watchDate.format('MMM D, YYYY') : '<not defined>';
         const ratingStr = this.rating !== null ? this.rating : 'not assigned';
-        return 'Id: ${this.id}, Title: ${this.title}, Favourite: ${this.favourites}, Watch date: ${dateStr}, Rating: ${ratingStr}';
+        // WATCH OUT: with single quotes (') variables are NOT interpolated, MUST use backticks (`) 
+        return `Id: ${this.id}, Title: ${this.title}, Favourite: ${this.favourite}, Watch date: ${dateStr}, Rating: ${ratingStr}`;
     }
 }
 
@@ -60,3 +61,5 @@ myLibrary.addNewFilm(new Film(4, 'Matrix', false,  null, null));
 myLibrary.addNewFilm(new Film(5, 'Shrek', false, '2023-03-21', 3));
 myLibrary.addNewFilm(new Film(6, 'Saving Private Ryan', true, '2025-08-19', 5));
 
+console.log('===== Exercise 1 =====');
+myLibrary.print();
