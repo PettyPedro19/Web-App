@@ -13,14 +13,14 @@ import dayjs from "dayjs";
  * Film constructor
  * @param {number} id 
  * @param {string} title 
- * @param {boolean} [favorite = false] 
+ * @param {boolean} [favourite = false] 
  * @param {string|null} [watchDate = null]    - accepted by dayjs (e.g. 'YYYY-MM-DD')
  * @param {number|null} [rating = null]       - 1-5
  */
-function Film(id, title, favorite = false, watchDate = null, rating = null) {
+function Film(id, title, favourite = false, watchDate = null, rating = null) {
     this.id = id;
     this.title = title;
-    this.favorite = favorite;
+    this.favourite = favourite;
     this.watchDate = watchDate ? dayjs(watchDate) : null;
     this.rating = rating;
 
@@ -28,8 +28,12 @@ function Film(id, title, favorite = false, watchDate = null, rating = null) {
         const dateStr = this.watchDate ? this.watchDate.format('MMMM D, YYYY') : '<not defined>';
         const ratingStr = this.rating !== null ? this.rating : 'not assigned';
         // WATCH OUT: with single quotes (') variables are NOT interpolated, MUST use backticks (`) 
-        return `Id: ${this.id}, Title: ${this.title}, Favourite: ${this.favourite}, Watch date: ${dateStr}, Rating: ${ratingStr}`;
-    }
+        return `Id: ${String(this.id).padEnd(4)}`
+            + `Title: ${this.title.padEnd(25)}`
+            + `Favourite: ${String(this.favourite).padEnd(8)}`
+            + `Watch date: ${dateStr.padEnd(20)}`
+            + `Rating: ${ratingStr}`;
+    };
 }
 
 /**
@@ -41,7 +45,8 @@ function FilmLibrary() {
 
     // This function adds a new film to the 'Film' entity.
     this.addNewFilm = (film) => {
-        if (!this.films.some(f => f.id == film.id))
+        // If movie is not already in the list, then add it.
+        if (!this.films.some(f => f.title == film.title) && !this.films.some(f => f.id == film.id))
             this.films.push(film);
         else
             throw new Error('Duplicated id');
@@ -54,13 +59,54 @@ function FilmLibrary() {
     };
 
     /**
+     * Removes a specific film from the library based on the provided 
+     * numerical ID.
+     *
+     * @param {*} id Id of the movie to be removed.
+     */
+    this.deleteFilm = (id) => {
+        const newList = this.films.filter(function (film, index, arr) {
+            return film.id != id;
+        })
+        this.films = newList;
+    }
+
+    /**
+     * Clears the watch date for every film currently stored in the library, 
+     * resetting them to <not defined>.
+     */
+    this.resetWatchedFilms = () => {
+        this.films.forEach((film) => film.watchDate = null);
+    }
+
+    /**
+     * Filters the library to return only films that have an assigned score.
+     * The resulting list is ordered by rating in descending order 
+     * (highest score first).
+     * @returns newList: filtered movies.
+     */
+    this.getRated = () => {
+        const newList = this.films.filter(function (film, index, arr) {
+            return film.rating > 0;
+        }).toSorted((d1, d2) => { return d2.rating - d1.rating });
+        return newList;
+    }
+
+
+    /**
      * Returns a new array of Films sorted by ascending watch date.
      * Unwatched films (no date) are placed at the end. 
      */
-    this.sortByDate = function() {
-        return[]
+    this.sortByDate = () => {
+        const newArray = [...this.films];
+        newArray.sort((d1, d2) => {
+            if (!(d1.watchDate)) return 1;
+            else if (!(d2.watchDate)) return -1;
+            return d1.watchDate.diff(d2.watchDate, 'day');
+        });
+        return newArray;
     }
-    
+
 
 }
 
@@ -78,8 +124,32 @@ function main() {
     myLibrary.addNewFilm(new Film(6, 'Saving Private Ryan', true, '2025-08-19', 5));
 
     // Printing the results.
-    console.log('===== Exercise 1 =====');
+    console.log('===== Exercise 2 =====');
     myLibrary.print();
+    console.log();
+
+    // Print sorted films
+    console.log('*** List of films (sorted) ***');
+    const sortedLibrary = myLibrary.sortByDate();
+    sortedLibrary.forEach((film) => console.log(film.toString()));
+    console.log();
+
+    // Deleting film #2
+    console.log('Deleting film #2');
+    myLibrary.deleteFilm(2);
+    myLibrary.print();
+    console.log();
+
+    // Reset dates.
+    console.log('*** List of films (reset dates) ***')
+    myLibrary.resetWatchedFilms();
+    myLibrary.print();
+    console.log();
+
+    // Retrieve and print films with an assigned rating
+    console.log('*** Films filtered, only the rated ones ***')
+    const ratedFilms = myLibrary.getRated();
+    ratedFilms.forEach((film) => console.log(film.toString()));
 
     // Additional instruction to enable debug.
     debugger;
