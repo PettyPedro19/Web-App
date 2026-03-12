@@ -1,4 +1,4 @@
-# Film Library - Lab 2
+# Film Library
 
 This project implements a Node.js application to manage a personal collection of films. The exercise focuses on practicing **constructor functions**, object manipulation, and date handling using the **day.js** library.
 
@@ -68,9 +68,3 @@ npm install dayjs
 node index.js
 
 ```
-
-
-
----
-
-Would you like me to add a section regarding the logic used to handle undefined dates or empty ratings?

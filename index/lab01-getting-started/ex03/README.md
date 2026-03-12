@@ -1,4 +1,4 @@
-# Film Library Extended - Lab 2 (Part 2)
+# Film Library Extended
 
 This project expands the initial Film Library application by introducing advanced data manipulation methods. The focus is on using the **functional programming paradigm** (such as `filter`, `map`, and `sort`) to manage and transform the collection of films.
 
@@ -50,5 +50,3 @@ Ensure **day.js** is installed, then run the test suite:
 node index.js
 
 ```
-
-Would you like me to provide the specific JavaScript code for the `sortByDate` comparator logic?

@@ -14,12 +14,6 @@ The goal is to create a function that iterates through an array of strings. For 
 
 ---
 
-## Logic Flow
-
-The following diagram illustrates the decision-making process for each string processed by the function:
-
----
-
 ## Implementation Requirements
 
 ### Function Signature
@@ -36,14 +30,3 @@ To ensure the robustness of the implementation, the following scenarios must be 
 4. **Three Characters**: Input `['cat']` should result in `caat`.
 5. **Long Strings**: Input `['javascript', 'coding']` should result in `jart` and `cong`.
 6. **Mixed Content**: An array containing a variety of the lengths mentioned above.
-
----
-
-## Execution
-
-To run the script and observe the results in the console, use the following command in your terminal:
-
-```bash
-node exercise.js
-
-```
