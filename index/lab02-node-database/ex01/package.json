@@ -12,9 +12,13 @@
   },
   "license": "MIT",
   "author": "Marco Pedron",
-  "type": "commonjs",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.20",
+    "sqlite3": "^5.1.7"
   }
 }
